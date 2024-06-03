@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Registration System - Edit User</title>
+</head>
+<body style="background-color: black; color:white;">
+<h2>Edit User Details</h2>
+<form th:object="${user}" th:action="@{/edit/{id}(id=${user.id})}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <label>Username: <input type="text" th:field="*{username}"></label><br>
+    <label>Email: <input type="email" th:field="*{email}"></label><br>
+    <label>Phone Number: <input type="text" th:field="*{phoneNo}"></label><br>
+    <label>First Name: <input type="text" th:field="*{firstName}"></label><br>
+    <label>Last Name: <input type="text" th:field="*{lastName}"></label><br>
+    <label>Password: <input type="password" th:field="*{password}"></label><br>
+    <input type="submit" value="Save">
+</form>
+<a href="/">Back to User List</a>
+</body>
+</html>

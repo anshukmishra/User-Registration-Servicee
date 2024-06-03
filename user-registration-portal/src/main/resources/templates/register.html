@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Registration System - Register User</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body style="background-color: black; color:white;">
+<h2>Register New User</h2>
+<form id="register-form" class="contact-form" >
+    <label>Username: <input type="text" name="username"></label><br>
+    <label>Email: <input type="email" name="email"></label><br>
+    <label>Phone Number: <input type="text" name="phoneNo"></label><br>
+    <label>First Name: <input type="text" name="firstName"></label><br>
+    <label>Last Name: <input type="text" name="lastName"></label><br>
+    <label>Password: <input type="password" name="password"></label><br>
+    <!--    <input type="submit" value="register">-->
+    <button class="contact-form__button" type="submit">Register</button>
+</form>
+<script>
+    $("#register-form").submit(function (event) {
+        event.preventDefault();
+        var formData = {
+            username: $("input[name='username']").val(),
+            email: $("input[name='email']").val(),
+            firstName: $("input[name='firstName']").val(),
+            lastName: $("input[name='lastName']").val(),
+            password: $("input[name='password']").val(),
+            phoneNo: $("input[name='phoneNo']").val(),
+        };
+
+        // Send an AJAX POST request
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/register", // Specify the server endpoint
+            contentType: "application/json", // Set the content type to JSON
+            data: JSON.stringify(formData), // Convert the data to JSON
+            success: function (response) {
+                // Handle the success response
+                console.log("Registration successful:", response);
+                $("#content-container").html(response);
+                // You can perform actions like showing a success message or redirecting the user.
+            },
+            error: function (error) {
+                // Handle the error response
+                console.error("Registration failed:", error);
+                // You can display an error message to the user.
+            }
+        });
+    });
+</script>
+<a href="/">Back to User List</a>
+</body>
+</html>
